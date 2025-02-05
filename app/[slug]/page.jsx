@@ -13,7 +13,7 @@ const page = ({ params }) => {
       const data = await api.json()
       setMovies(data.results[0])
       console.log(data);
-            // ✅ Dynamically update metadata
+            // change the title when route change
       if (data.results[0]) {
         document.title = `${data.results[0].trackName} - Movie Details`;
 
