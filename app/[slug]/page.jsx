@@ -2,10 +2,7 @@
 import React, { use, useEffect, useState } from 'react'
 import Image from 'next/image'
 import Loader from "../../public/loader.webp"
-export const metadata = {
-  title: 'Trailler Movies| Films',
-  description: 'Trailers of Movies in website',
-}
+
 const page = ({ params }) => {
   
   const { slug } = params
@@ -16,6 +13,20 @@ const page = ({ params }) => {
       const data = await api.json()
       setMovies(data.results[0])
       console.log(data);
+            // ✅ Dynamically update metadata
+      if (data.results[0]) {
+        document.title = `${data.results[0].trackName} - Movie Details`;
+
+        const descriptionMeta = document.querySelector('meta[name="description"]');
+        if (descriptionMeta) {
+          descriptionMeta.setAttribute("content", data.results[0].longDescription || "Movie details page.");
+        } else {
+          const newMeta = document.createElement("meta");
+          newMeta.name = "description";
+          newMeta.content = data.results[0].longDescription || "Movie details page.";
+          document.head.appendChild(newMeta);
+        }
+      }
 
     }
     fetchMoviesDetails()
