@@ -2,6 +2,10 @@
 import React, { use, useEffect, useState } from 'react'
 import Image from 'next/image'
 import Loader from "../../public/loader.webp"
+export const metadata = {
+  title: 'Trailler Movies| Films',
+  description: 'Trailers of Movies in website',
+}
 const page = ({ params }) => {
   const { slug } = params
   const [movies, setMovies] = useState(null);
